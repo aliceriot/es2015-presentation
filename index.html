@@ -73,21 +73,118 @@ var bob = {
 
 <section data-markdown>
   <script type="text/template">
-
-  </script>
-</section>
-
-<!-- blank markdown slide -->
-
-<section data-markdown>
-  <script type="text/template">
 ## Classes
 
 ```
 class FooBar extends ParentClass {
-  ...
+  constructor (foo, bar) {
+    this.foo = foo;
+  }
+
+  classMethod (args) {
+   args.forEach(a => fooBar(a));
+  }
 }
 ```
+
+* sugar over normal `Object.prototype` JS stuff
+* supports inheritance, super calls, constructors, etc
+* simpler method syntax
+
+  </script>
+</section>
+
+<section data-markdown>
+  <script type="text/template">
+### React example
+```
+var MyComponent = React.createClass({
+  propTypes: {
+    myProp:  React.PropTypes.object
+  }
+
+  render: function() {
+    return (
+      <h1>
+        {this.props.myProp.fooBar}
+      </h1>
+    );
+  }
+});
+```
+
+```
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render () {
+    return (
+      <h1>
+        {this.props.myProp.fooBar}
+      </h1>
+    );
+  }
+}
+MyComponent.propTypes = { myProp: React.PropTypes.object };
+```
+  </script>
+</section>
+
+<section data-markdown>
+  <script type="text/template">
+## template strings
+
+```
+// allows multiline strings
+
+`wow such a nice
+multiline
+string!`
+
+// can do interpolation of variables
+
+var messageCount = "23";
+`hey, you have ${messageCount} new messages.`
+```
+</script>
+</section>
+
+<section data-markdown>
+  <script type="text/template">
+### Destructuring
+
+```
+// list matching
+var [a, ,b] = [1,2,3];
+a === 1;
+b === 3;
+
+// object matching
+var { op: a, lhs: { op: b }, rhs: c } = getASTNode();
+
+function g({name: x}) {
+  console.log(x);
+}
+g({name: 5})
+// 5
+```
+
+  </script>
+</section>
+
+<section data-markdown>
+  <script type="text/template">
+
+  </script>
+</section>
+
+
+
+<!-- blank markdown slide -->
+<section data-markdown>
+  <script type="text/template">
 
   </script>
 </section>

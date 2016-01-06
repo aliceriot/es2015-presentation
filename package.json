@@ -7,7 +7,7 @@
   "main": "js/reveal.js",
   "scripts": {
     "test": "grunt test",
-    "start": "grunt serve"
+    "start": "python -m SimpleHTTPServer"
   },
   "author": {
     "name": "Hakim El Hattab",

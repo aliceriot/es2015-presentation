@@ -176,6 +176,143 @@ g({name: 5})
 
 <section data-markdown>
   <script type="text/template">
+## `let` and `const`
+
+```
+let x = 4;
+for (let i = 0; i < foo.length, i++)  { ... };
+const foo = "bar";
+foo = "baz"; // raises SyntaxError
+```
+
+### `let`
+
+* block scoped (not function wide like `var`)
+* fresh binding on each loop iteration
+* redeclaring with `let` gives a `SyntaxError`
+* const is like `let` but raises `SyntaxError` if you try to reassign
+
+  </script>
+</section>
+
+<section data-markdown>
+  <script type="text/template">
+### `let` example
+
+```
+// this is bad! (or, at least, confusing)
+var add_handlers = function (nodes) {
+  for (var i = 0; i < 10; i++) {
+    nodes[i].onclick = function (e) {
+      alert(i);
+    };
+  }
+};
+```
+
+```
+// this is better!
+var add_handlers_properly = function (nodes) {
+  for (let i = 0; i < 10; i++) {
+    nodes[i].onclick = function (e) {
+      alert(i);
+    };
+  }
+};
+```
+  </script>
+</section>
+
+
+
+<section data-markdown>
+  <script type="text/template">
+### Modules
+
+```
+// src/foo.js
+class Foo { ... }
+export default Foo;
+
+// src/bar.js
+class Bar { ... }
+class Baz { ... }
+
+export Bar;
+export Baz;
+
+// src/app.js
+import Foo from "./foo";
+import { Bar, Baz } from "./bar";
+// or
+import * as Bar from "./bar";
+Bar.Baz
+```
+
+* can export multiple things
+* use `default` keyword to, well, set a default
+
+
+  </script>
+</section>
+
+<section data-markdown>
+  <script type="text/template">
+### Generators and iterators
+
+```
+function* idMaker(){
+  let index = 0;
+  while(index < 3)
+    yield index++;
+}
+const gen = idMaker();
+
+console.log(gen.next().value); // 0
+console.log(gen.next().value); // 1
+console.log(gen.next().value); // 2
+console.log(gen.next().value); // undefined
+```
+
+* declared with `function*` keyword
+* return an `Iterator` object when called
+* calling `.next()` on an `Iterator` executes the function body until `yield`
+* context in the function persists between `.next()` calls
+  </script>
+</section>
+
+<section data-markdown>
+  <script type="text/template">
+### more complicated example
+
+```
+var fibonacci = {
+  [Symbol.iterator]: function*() {
+    var pre = 0, cur = 1;
+    for (;;) {
+      var temp = pre;
+      pre = cur;
+      cur += temp;
+      yield cur;
+    }
+  }
+}
+```
+`for .. of` syntax:
+``` for (var n of fibonacci) {
+  if (n > 1000)
+    break;
+  console.log(n);
+}
+```
+  </script>
+</section>
+
+
+<section data-markdown>
+  <script type="text/template">
+* full unicode support
+* 
 
   </script>
 </section>
@@ -194,6 +331,12 @@ g({name: 5})
    </div>
 
   </div>
+
+
+
+
+
+
 
   <script src="lib/js/head.min.js"></script>
   <script src="js/reveal.js"></script>

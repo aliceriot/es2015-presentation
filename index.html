@@ -44,7 +44,7 @@
     <script type="text/template">
 # ES2015
 
-## a overview of some new features
+## a (non-exhaustive) overview of some new features
     </script>
 </section>
 
@@ -65,7 +65,7 @@ var bob = {
 };
 ```
 
-* more compact syntax (vs `evens.map(function(v) { v + 1});`)
+* more compact syntax
 * shares same lexical `this` as surrounding code
 
   </script>
@@ -77,12 +77,16 @@ var bob = {
 
 ```
 class FooBar extends ParentClass {
-  constructor (foo, bar) {
-    this.foo = foo;
+  constructor (bar) {
+    this.bar = bar;
   }
 
-  classMethod (args) {
-   args.forEach(a => fooBar(a));
+  prototypeMethod () { // like an instance method in Ruby
+    console.log("I'm a method on the prototype!");
+  }
+
+  static classMethod () {
+    console.log("I'm a method on the class!");
   }
 }
 ```
@@ -197,7 +201,8 @@ foo = "baz"; // raises SyntaxError
 
 <section data-markdown>
   <script type="text/template">
-### `let` example
+
+### another example:
 
 ```
 // this is bad! (or, at least, confusing)
@@ -223,7 +228,17 @@ var add_handlers_properly = function (nodes) {
   </script>
 </section>
 
+<section data-markdown>
+  <script type="text/template">
+### default arguments!
 
+```
+let hello = function(arg = "wow!") {
+  alert(arg);
+}
+```
+  </script>
+</section>
 
 <section data-markdown>
   <script type="text/template">
@@ -298,7 +313,9 @@ var fibonacci = {
   }
 }
 ```
-`for .. of` syntax:
+
+`for ... of` syntax:
+
 ``` for (var n of fibonacci) {
   if (n > 1000)
     break;
@@ -312,31 +329,22 @@ var fibonacci = {
 <section data-markdown>
   <script type="text/template">
 * full unicode support
-* 
+* lots of new library functions (`math`, `String`, etc)
+* proxies
+* symbols (for object keys and so on)
+* binary and octal literals
+
+lots of other stuff!
 
   </script>
 </section>
 
-
-
-<!-- blank markdown slide -->
-<section data-markdown>
-  <script type="text/template">
-
-  </script>
-</section>
 
 <!-- close the slides divs -->
 
    </div>
 
   </div>
-
-
-
-
-
-
 
   <script src="lib/js/head.min.js"></script>
   <script src="js/reveal.js"></script>
